@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.musicapplication.MainActivity"
+    android:background="@color/background"
+    android:id="@+id/contentmusic"
+    >
+
+    <!--<include layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/include" />-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/musicListView"
+        />
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_above="@+id/musicinfo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+
+        android:id="@+id/musicinfo"
+        android:layout_above="@+id/previous"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/previous"
+        android:onClick="previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ImageView
+        android:id="@+id/play_pause"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/play"
+        android:onClick="play_pause"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/next"
+        android:onClick="next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <ImageView
+        android:id="@+id/play_mode"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:onClick="changeMode"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/play_pause"/>
+    <!--<ImageButton
+        android:id="@+id/previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/previous"
+        android:onClick="previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ImageButton
+        android:id="@+id/play_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/play"
+        android:onClick="play_pause"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <ImageButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/next"
+        android:onClick="next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />-->
+
+</RelativeLayout>
