@@ -3,13 +3,13 @@ package com.example.puzzlegame;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -18,9 +18,6 @@ import com.example.puzzlegame.util.MLog;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by zyw on 2017/10/18.
- */
 public class MainView extends View {
     private static final String TAG = MainView.class.getSimpleName();
     private Context context;
@@ -31,8 +28,8 @@ public class MainView extends View {
     private Bitmap[] bitmapTiles;
     private int[][] dataTiles;
     private Board tilesBoard;
-    private final int COL = 3;
-    private final int ROW = 3;
+    private int COL = 3;
+    private int ROW = 3;
     private int[][] dir = {
             {-1, 0},//左
             {0, -1},//上
@@ -43,26 +40,26 @@ public class MainView extends View {
 
     int steps = 0;
 
-    public MainView(Context context) {
+    public MainView(Context context,String image,int level) {
         super(context);
+        this.COL=level;
+        this.ROW=level;
         this.context = context;
         paint = new Paint();
         paint.setAntiAlias(true);
-        init();
+        init(image);
         startGame();
-        MLog.d(TAG, MainActivity.getScreenWidth() + "," + MainActivity.getScreenHeight());
+        MLog.d(TAG, PuzzGame.getScreenWidth() + "," +PuzzGame.getScreenHeight());
     }
 
-    /**
-     * 初始化
-     */
-    private void init() {
-        //载入图像，并将图片切成块
+
+    private void init(String image) {
+
         AssetManager assetManager = context.getAssets();
         try {
-            InputStream assetInputStream = assetManager.open("back.jpg");
+            InputStream assetInputStream = assetManager.open(image);
             Bitmap bitmap = BitmapFactory.decodeStream(assetInputStream);
-            back = Bitmap.createScaledBitmap(bitmap, MainActivity.getScreenWidth(), MainActivity.getScreenHeight(), true);
+            back = Bitmap.createScaledBitmap(bitmap, PuzzGame.getScreenWidth(), PuzzGame.getScreenHeight(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,9 +74,6 @@ public class MainView extends View {
         }
     }
 
-    /**
-     * 开始游戏
-     */
     private void startGame() {
         tilesBoard = new Board();
         dataTiles = tilesBoard.createRandomBoard(ROW, COL);
@@ -101,13 +95,6 @@ public class MainView extends View {
         }
     }
 
-    /**
-     * 将屏幕上的点转换成,对应拼图块的索引
-     *
-     * @param x
-     * @param y
-     * @return
-     */
     private Point xyToIndex(int x, int y) {
         int extraX = x % tileWidth > 0 ? 1 : 0;
         int extraY = x % tileWidth > 0 ? 1 : 0;
@@ -147,10 +134,12 @@ public class MainView extends View {
                                             startGame();
                                         }
                                     })
-                                    .setNegativeButton("退出游戏", new DialogInterface.OnClickListener() {
+                                    .setNegativeButton("退出", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            System.exit(0);
+                                            Intent intent=new Intent();
+                                            intent.setClass(getContext(),MainActivity.class);
+                                            context.startActivity(intent);
                                         }
                                     })
                                     .create()
@@ -173,5 +162,4 @@ public class MainView extends View {
         }
         MLog.d(TAG, sb.toString());
     }
-
 }

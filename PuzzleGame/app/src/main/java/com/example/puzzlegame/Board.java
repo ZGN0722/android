@@ -1,20 +1,13 @@
 package com.example.puzzlegame;
 
-import android.util.Log;
-
 import java.util.Random;
 
-/**
- * 用来保存块数据的类
- * 注意：x对应的是col,y对应的row
- */
 public class Board {
     private static final String TAG = "Board";
     private int[][] array = null;
     private int row = 0;
     private int col = 0;
 
-    //四个方向
     private int[][] dir = {
             {0, 1},//下
             {1, 0},//右
@@ -30,15 +23,6 @@ public class Board {
                 array[i][j] = idx++;
     }
 
-    /**
-     * 移动块的位置
-     *
-     * @param srcX
-     * @param srcY
-     * @param xOffset
-     * @param yOffset
-     * @return 新的位置，错误返回new Point(-1,-1);
-     */
     private Point move(int srcX, int srcY, int xOffset, int yOffset) {
         int x = srcX + xOffset;
         int y = srcY + yOffset;
@@ -52,12 +36,6 @@ public class Board {
         return new Point(x, y);
     }
 
-    /**
-     * 得到下一个可以移动的位置
-     *
-     * @param src
-     * @return
-     */
     private Point getNextPoint(Point src) {
         Random rd = new Random();
         int idx = rd.nextInt(4);//产生0~3的随机数
@@ -70,13 +48,7 @@ public class Board {
         return getNextPoint(src);
     }
 
-    /**
-     * 生成拼图数据
-     *
-     * @param row
-     * @param col
-     * @return
-     */
+
     public int[][] createRandomBoard(int row, int col) {
         if (row < 2 || col < 2)
             throw new IllegalArgumentException("行和列都不能小于2");
@@ -94,12 +66,7 @@ public class Board {
         return array;
     }
 
-    /**
-     * 判断是否拼图成功
-     *
-     * @param arr
-     * @return
-     */
+
     public boolean isSuccess(int[][] arr) {
         int idx = 0;
         for (int i = 0; i < arr.length; i++) {
